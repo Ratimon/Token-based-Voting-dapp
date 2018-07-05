@@ -1,6 +1,6 @@
 # Token-based-Voting-dapp
  
- Staging/Testing: Ropsten Command for test
+ Staging/Testing: Ropsten Geth Command for test
     ```
     geth --testnet --syncmode fast --rpc --rpcapi db,eth,net,web3,personal --cache=1024 --rpcport 8545 --rpcaddr 127.0.0.1 --rpccorsdomain "*"
     ```
@@ -13,4 +13,24 @@ Geth argument explanation
 
 --rpc --rpcapi db,eth,net,web3,personal: This tells geth to accept requests via RPC and also enable certain APIs we will be using in the next sections.
 
---rpcport 8545 --rpcaddr 127.0.0.1 --rpccorsdomain "*": This is the host and port at which we will be communicating with the blockchain server/geth using web3js library. 
+--rpcport 8545 --rpcaddr 127.0.0.1 --rpccorsdomain "*": This is the host and port at which we will be communicating with the blockchain server/geth using web3js library.
+
+Command to deal with Account
+    ```
+    truffle console
+    ```
+    ```
+    truffle(default)> web3.personal.newAccount('verystrongpassword')
+    '0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1'
+    truffle(default)> web3.eth.getBalance('0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1')
+    { [String: '0'] s: 1, e: 0, c: [ 0 ] }
+    truffle(default)> web3.personal.unlockAccount('0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1', 'verystrongpassword', 15000)
+    ```
+    or
+     ```
+    truffle(default)> web3.personal.listAccounts
+    '0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1'
+    truffle(default)> web3.eth.getBalance('0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1')
+    { [String: '0'] s: 1, e: 0, c: [ 0 ] }
+    truffle(default)> web3.personal.unlockAccount('0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1', 'verystrongpassword', 15000)
+    ```   
